@@ -1,4 +1,4 @@
-package com.weather.weatherserver.Models;
+package com.chrisbarbati.weatherserver.Models;
 
 public class Weather {
     /**

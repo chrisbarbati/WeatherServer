@@ -1,7 +1,7 @@
-package com.weather.weatherserver.API;
+package com.chrisbarbati.weatherserver.API;
 
-import com.weather.weatherserver.Models.Weather;
-import com.weather.weatherserver.RPI.SenseHat;
+import com.chrisbarbati.weatherserver.RPI.SenseHat;
+import com.chrisbarbati.weatherserver.Models.Weather;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

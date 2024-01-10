@@ -1,4 +1,4 @@
-package com.weather.weatherserver.RPI;
+package com.chrisbarbati.weatherserver.RPI;
 
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
