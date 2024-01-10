@@ -26,5 +26,5 @@ This repository serves as a demonstration of implementing a basic RESTful API us
 This project utilizes the [SenseHATI2C](https://github.com/chrisbarbati/SenseHatI2C/tree/main) library, authored by myself, to interface with SenseHAT sensors.
 
 ---
+
 This project is created to showcase Spring Boot skills and is intentionally kept straightforward. For any questions or feedback, please contact [Christian Barbati](mailto:chris.barbati@gmail.com)
-```
