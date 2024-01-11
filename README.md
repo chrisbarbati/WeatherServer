@@ -15,7 +15,7 @@ Send a GET request to retrieve the weather information:
 GET /API/weather
 ```
 
-The server will respond with a JSON object containing the current temperature, humidity, and pressure readings. To test it, I am currently hosting it [on a Raspberry Pi at my home](http://142.51.225.46:2048/API/weather)
+The server will respond with a JSON object containing the current temperature, humidity, and pressure readings. To test it, I am currently hosting it [on a Raspberry Pi at my home](http://chrisbarbati.ddns.net:2048/API/weather). HTTP only, until I get the SSL certificates installed.
 
 ## Purpose
 
