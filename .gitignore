@@ -13,6 +13,9 @@ target/
 .springBeans
 .sts4-cache
 
+#SSL Key
+.p12
+
 # Eclipse m2e generated files
 # Eclipse Core
 .project
