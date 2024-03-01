@@ -5,6 +5,8 @@ import com.pi4j.context.Context;
 import com.pi4j.io.i2c.I2C;
 import com.pi4j.io.i2c.I2CConfig;
 import com.pi4j.io.i2c.I2CProvider;
+import com.chrisbarbati.weatherserver.Models.PressureUnits;
+import com.chrisbarbati.weatherserver.Models.TempUnits;
 
 /**
  * Christian Barbati - Dec 2023
@@ -32,13 +34,19 @@ public class SenseHATI2C
     static final int LPS25H_PRESS_OUT_H_REGISTER = 0x2A;
     static final int LPS25H_PRESS_OUT_L_REGISTER = 0x29;
     static final int LPS25H_PRESS_OUT_XL_REGISTER = 0x28;
+
+    /*
+     * Enums for temperature and pressure units
+     */
+
     
     /**
-     * Returns a double representing the current temperature reading in degrees Celsius, as read by the LPS25H pressure sensor
+     * Returns a double representing the current temperature reading, as read by the LPS25H pressure sensor
      * 
-     * @return Current temperature in degrees Celsus, as a double
+     * @param units The units in which the temperature will be returned
+     * @return Current temperature, as a double
      */
-    public synchronized static double getTempFromPressure(){
+    public synchronized static double getTempFromPressure(TempUnits units){
         double temperature = 0;
 
         I2C tempI2C = getI2C("TEMPFROMPRESSURE", LPS25H_ADDRESS);
@@ -65,14 +73,27 @@ public class SenseHATI2C
 
             double cycles = (double)tempFull;
 
-            //Temperature offset is cycles/480, relative to a base number of 42.5 degrees Celsius
+            //Temperature offset is cycles/480, relative to a base number of 42.5 degrees CELSIUS
             temperature = 42.5 + (cycles/480);
         } catch (Exception e){
             System.out.println(e);
         }
 
+        switch (units){
+            case FAHRENHEIT:
+                temperature = (temperature * 9/5) + 32;
+                break;
+            case KELVIN:
+                temperature += 273.15;
+                break;
+            case CELSIUS:
+                break;
+            default:
+                break;
+        }
+
         return temperature;
-    }
+}
 
     /**
      * Initializes the appropriate registers on the LPS25H
@@ -140,11 +161,12 @@ public class SenseHATI2C
     }
 
     /**
-     * Returns a double representing the current pressure in millibar, as read by the LPS25H pressure sensor
+     * Returns a double representing the current pressure, as read by the LPS25H pressure sensor
      * 
-     * @return Current atmospheric pressure in millibar, as double
+     * @param units The units in which the pressure will be returned
+     * @return Current atmospheric pressure, as double
      */
-    public synchronized static double getPressureMbar(){
+    public synchronized static double getPressure(PressureUnits units){
         double pressure = 0;
 
         I2C pressureI2C = getI2C("PRESSURE", LPS25H_ADDRESS);
@@ -175,35 +197,26 @@ public class SenseHATI2C
             System.out.println(e);
         }
 
+        switch (units){
+            case PSI:
+                pressure = pressure / 68.9476;
+                break;
+            case MILLIBAR:
+                break;
+            default:
+                break;
+        }
+
         return pressure;
     }
 
     /**
-     * Returns a double representing the current atmospheric in PSI, as read by the LPS25H pressure sensor
+     * Returns a double representing the current temperature, as read by the HTS221 humidity sensor
      * 
-     * @return Current atmospheric pressure in PSI, as double
+     * @param units The units in which the temperature will be returned
+     * @return Current temperature, as double
      */
-    public synchronized static double getPressurePSI(){
-        return getPressureMbar() / 68.948;
-    }
-
-    /**
-     * I've noticed that the two temperature readings don't always agree, so I 
-     * have added this function to average the two values.
-     * 
-     * Returns a temperature value averaged from both LPS25H and HTS221 sensors. 
-     * @return
-     */
-    public synchronized static double getTempAveraged(){
-        return (getTempFromPressure() + getTempFromHumidity()) / 2;
-    }
-
-    /**
-     * Returns a double representing the current temperature reading in degrees Celsius, as read by the HTS221 humidity sensor
-     * 
-     * @return Current temperature in degrees Celsius, as double
-     */
-    public synchronized static double getTempFromHumidity(){
+    public synchronized static double getTempFromHumidity(TempUnits units){
         double temp = 0;
         I2C humidityI2C = getI2C("TEMPFROMHUMIDITY", HTS221_ADDRESS);
 
@@ -284,13 +297,26 @@ public class SenseHATI2C
             /**
              * Now that we have the equation for our line, and the independent
              * variable represented by tOut, we can calculate our temperature
-             * reading (degrees Celsius)
+             * reading (degrees CELSIUS)
              */
             temp = (slope * tOutDouble) + b;
+
         } catch (Exception e){
             System.out.println(e);
         }
 
+        switch (units){
+            case FAHRENHEIT:
+                temp = (temp * 9/5) + 32;
+                break;
+            case KELVIN:
+                temp += 273.15;
+                break;
+            case CELSIUS:
+                break;
+            default:
+                break;
+        }
 
         return temp;
     }
@@ -393,3 +419,4 @@ public class SenseHATI2C
         return i2c;
     }
 }
+

@@ -4,15 +4,25 @@ public class Weather {
     /**
      * Model class to hold information about the current weather.
      */
-
     private double temperature;
     private double humidity;
     private double pressure;
+
+    private TempUnits tempUnit;
+    private PressureUnits pressureUnit;
 
     public Weather(double temperature, double humidity, double pressure){
         setTemperature(temperature);
         setHumidity(humidity);
         setPressure(pressure);
+    }
+
+    public Weather(double temperature, double humidity, double pressure, TempUnits tempUnit, PressureUnits pressureUnit){
+        setTemperature(temperature);
+        setHumidity(humidity);
+        setPressure(pressure);
+        setTempUnit(tempUnit);
+        setPressureUnit(pressureUnit);
     }
 
     public double getTemperature() {
@@ -37,5 +47,21 @@ public class Weather {
 
     public void setPressure(double pressure) {
         this.pressure = pressure;
+    }
+
+    public TempUnits getTempUnit() {
+        return tempUnit;
+    }
+
+    public void setTempUnit(TempUnits tempUnit) {
+        this.tempUnit = tempUnit;
+    }
+
+    public PressureUnits getPressureUnit() {
+        return pressureUnit;
+    }
+
+    public void setPressureUnit(PressureUnits pressureUnit) {
+        this.pressureUnit = pressureUnit;
     }
 }

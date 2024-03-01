@@ -1,6 +1,8 @@
 package com.chrisbarbati.weatherserver.Builder;
 
 import com.chrisbarbati.weatherserver.Models.Weather;
+import com.chrisbarbati.weatherserver.Models.TempUnits;
+import com.chrisbarbati.weatherserver.Models.PressureUnits;
 import com.chrisbarbati.weatherserver.RPI.SenseHATI2C;
 
 /**
@@ -12,11 +14,71 @@ import com.chrisbarbati.weatherserver.RPI.SenseHATI2C;
 public class WeatherBuilder {
 
     public Weather getWeather(){
-        //Uses the SenseHAT class to get current weather information
-        double temperature = SenseHATI2C.getTempFromPressure();
+        /**
+         * Get temperature, humidity, and pressure from the SenseHAT
+         *
+         * Parameterless method defaults to celsius and millibar
+         */
+        double temperature = SenseHATI2C.getTempFromPressure(TempUnits.CELSIUS);
         double humidity = SenseHATI2C.getHumidity();
-        double pressure = SenseHATI2C.getPressureMbar();
+        double pressure = SenseHATI2C.getPressure(PressureUnits.MILLIBAR);
 
         return new Weather(temperature, humidity, pressure);
+    }
+
+    public Weather getWeather(String tempUnitString, String pressureUnitString){
+        double temperature;
+        double humidity;
+        double pressure;
+
+        TempUnits tempUnit;
+        PressureUnits pressureUnit;
+
+        /**
+         * Get temperature, dependent on units. If no unit is specified, assume celsius
+         *
+         * Perform null test first to avoid null pointer exception
+         */
+        if(tempUnitString == null){
+            tempUnit = TempUnits.CELSIUS;
+        }else{
+            if(tempUnitString.equals("celsius") || tempUnitString.equals("")) {
+                tempUnit = TempUnits.CELSIUS;
+            } else if(tempUnitString.equals("fahrenheit")){
+                tempUnit = TempUnits.FAHRENHEIT;
+            } else if(tempUnitString.equals("kelvin")){
+                tempUnit = TempUnits.KELVIN;
+            }
+            else {
+                throw new IllegalArgumentException("Invalid temperature unit");
+            }
+        }
+
+        /**
+         * Get pressure, dependent on units. If no unit is specified, assume millibar
+         *
+         * Perform null test first to avoid null pointer exception
+         */
+        if(pressureUnitString == null) {
+            pressureUnit = PressureUnits.MILLIBAR;
+        }else{
+            pressureUnitString = pressureUnitString.trim().toLowerCase();
+
+            if(pressureUnitString.equals("millibar") || pressureUnitString.equals("")) {
+                pressureUnit = PressureUnits.MILLIBAR;
+            } else if(pressureUnitString.equals("psi")){
+                pressureUnit = PressureUnits.PSI;
+            } else {
+                throw new IllegalArgumentException("Invalid pressure unit");
+            }
+        }
+
+        //Get temperature and pressure dependent on the units selected.
+        temperature = SenseHATI2C.getTempFromPressure(tempUnit);
+        pressure = SenseHATI2C.getPressure(pressureUnit);
+        //Get humidity, as % of relative humidity
+        humidity = SenseHATI2C.getHumidity();
+
+        return new Weather(temperature, humidity, pressure, tempUnit, pressureUnit);
     }
 }
