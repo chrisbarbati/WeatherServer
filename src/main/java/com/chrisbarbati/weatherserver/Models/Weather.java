@@ -2,7 +2,7 @@ package com.chrisbarbati.weatherserver.Models;
 
 public class Weather {
     /**
-     * Model class to hold information about the current weather.
+     * Model class to hold information about the current weather data.
      */
     private double temperature;
     private double humidity;

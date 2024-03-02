@@ -19,7 +19,7 @@ public class WeatherBuilder {
          *
          * Parameterless method defaults to celsius and millibar
          */
-        double temperature = SenseHATI2C.getTempFromPressure(TempUnits.CELSIUS);
+        double temperature = SenseHATI2C.getTempFromHumidity(TempUnits.CELSIUS);
         double humidity = SenseHATI2C.getHumidity();
         double pressure = SenseHATI2C.getPressure(PressureUnits.MILLIBAR);
 
@@ -38,6 +38,9 @@ public class WeatherBuilder {
          * Get temperature, dependent on units. If no unit is specified, assume celsius
          *
          * Perform null test first to avoid null pointer exception
+         *
+         * Might be better handled with handler methods for larger projects where extensibility is required,
+         * but for this situation it is not necessary as I don't expect to add more units.
          */
         if(tempUnitString == null){
             tempUnit = TempUnits.CELSIUS;
