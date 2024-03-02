@@ -18,7 +18,7 @@ GET /API/weather
 The server will respond with a JSON object containing the current temperature, humidity, and pressure readings. To test it, I am currently hosting it [on a Raspberry Pi at my home](https://chrisbarbati.ddns.net:2048/API/weather).
 ## Purpose
 
-This repository serves as a demonstration of implementing a basic RESTful API using Spring Boot to retrieve sensor data from the SenseHAT on a Raspberry Pi. It showcases familiarity with Spring Boot's capabilities for building simple yet effective server applications.
+This repository serves as a demonstration of implementing a basic RESTful API using Spring Boot to retrieve sensor data from the SenseHAT on a Raspberry Pi. It showcases familiarity with Spring Boot as well as general object-oriented programming and software development skills.
 
 ## Acknowledgment
 
