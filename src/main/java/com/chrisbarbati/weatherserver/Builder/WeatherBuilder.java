@@ -11,7 +11,7 @@ import com.chrisbarbati.weatherserver.RPI.SenseHATI2C;
  * Built out as a separate class to make it easier to modify WeatherAPI in the future. Unlikely to be
  * necessary, but it's good practice to separate duties
  */
-public class WeatherBuilder implements WeatherBuilderAbstract {
+public class WeatherBuilder implements WeatherBuilderInterface {
 
     /**
      * Get temperature, humidity, and pressure from the SenseHAT
