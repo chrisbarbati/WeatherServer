@@ -1,7 +1,7 @@
 
 # Weather Server with Spring Boot
 
-This repository contains a simple Weather Server implemented using Spring Boot. The server exposes a RESTful API endpoint that retrieves temperature, humidity, and pressure information from the SenseHAT sensors on a Raspberry Pi using the [SenseHATI2C](https://github.com/chrisbarbati/SenseHatI2C/tree/main) library, which I wrote myself.
+This repository contains a simple Weather Server implemented using Spring Boot. The server exposes a RESTful API endpoint that retrieves temperature, humidity, and pressure information from the SenseHAT sensors on a Raspberry Pi using the [SenseHAT](https://github.com/chrisbarbati/SenseHat/tree/main) library, which I wrote myself.
 
 ## Functionality
 

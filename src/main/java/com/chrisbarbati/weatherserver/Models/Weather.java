@@ -1,5 +1,8 @@
 package com.chrisbarbati.weatherserver.Models;
 
+import com.chrisbarbati.SenseHAT.Units.PressureUnits;
+import com.chrisbarbati.SenseHAT.Units.TempUnits;
+
 public class Weather {
     /**
      * Model class to hold information about the current weather data.

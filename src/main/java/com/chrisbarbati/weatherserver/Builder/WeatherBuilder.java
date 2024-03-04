@@ -1,9 +1,8 @@
 package com.chrisbarbati.weatherserver.Builder;
 
+import com.chrisbarbati.SenseHAT.*;
+import com.chrisbarbati.SenseHAT.Units.*;
 import com.chrisbarbati.weatherserver.Models.Weather;
-import com.chrisbarbati.weatherserver.Models.TempUnits;
-import com.chrisbarbati.weatherserver.Models.PressureUnits;
-import com.chrisbarbati.weatherserver.RPI.SenseHATI2C;
 
 /**
  * Builder class to create a Weather object.
@@ -20,9 +19,10 @@ public class WeatherBuilder implements WeatherBuilderInterface {
      */
     @Override
     public Weather getWeather(){
-        double temperature = SenseHATI2C.getTempFromHumidity(TempUnits.CELSIUS);
-        double humidity = SenseHATI2C.getHumidity();
-        double pressure = SenseHATI2C.getPressure(PressureUnits.MILLIBAR);
+        SenseHAT sh = new SenseHAT();
+        double temperature = sh.getTempFromHumidity(TempUnits.CELSIUS);
+        double humidity = sh.getHumidity();
+        double pressure = sh.getPressure(PressureUnits.MILLIBAR);
 
         return new Weather(temperature, humidity, pressure);
     }
@@ -35,6 +35,8 @@ public class WeatherBuilder implements WeatherBuilderInterface {
      */
     @Override
     public Weather getWeather(String tempUnitString, String pressureUnitString){
+        SenseHAT hat = new SenseHAT();
+
         double temperature;
         double humidity;
         double pressure;
@@ -85,10 +87,10 @@ public class WeatherBuilder implements WeatherBuilderInterface {
         }
 
         //Get temperature and pressure dependent on the units selected.
-        temperature = SenseHATI2C.getTempFromPressure(tempUnit);
-        pressure = SenseHATI2C.getPressure(pressureUnit);
+        temperature = hat.getTempFromPressure(tempUnit);
+        pressure = hat.getPressure(pressureUnit);
         //Get humidity, as % of relative humidity
-        humidity = SenseHATI2C.getHumidity();
+        humidity = hat.getHumidity();
 
         return new Weather(temperature, humidity, pressure, tempUnit, pressureUnit);
     }
