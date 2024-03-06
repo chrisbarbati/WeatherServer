@@ -15,6 +15,14 @@ Send a GET request to retrieve the weather information:
 GET /API/weather
 ```
 
+The default units are degrees Celsius and pressure in Millibar, but adding request parameters will allow you to select other units if desired:
+
+```
+GET /API/weather?temp-unit=fahrenheit&pressure-unit=psi
+```
+
+At present the supported temperature units are Celsius, Fahrenheit, Kelvin. Supported pressure units are Millibar and PSI (lbs/in^2).
+
 The server will respond with a JSON object containing the current temperature, humidity, and pressure readings. To test it, I am currently hosting it [on a Raspberry Pi at my home](https://chrisbarbati.ddns.net:2048/API/weather).
 ## Purpose
 
