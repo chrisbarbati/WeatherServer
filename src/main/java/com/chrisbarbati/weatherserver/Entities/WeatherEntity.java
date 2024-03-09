@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Entity class to hold information about the current weather data.
  *
- * No longer extends Weather class. Make this implementation cleaner
+ * No longer extends Weather class. Make this implementation cleaner.
  */
 
 @Entity

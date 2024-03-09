@@ -1,7 +1,5 @@
 package com.chrisbarbati.weatherserver.Scheduled;
 
-import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
 import org.slf4j.Logger;
@@ -9,6 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+/**
+ * Class that handles the scheduling of weather data.
+ *
+ */
 
 @Component
 public class WeatherDataScheduler {

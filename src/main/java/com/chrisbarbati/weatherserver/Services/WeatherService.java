@@ -9,7 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Service class to handle the weather data.
+ */
 
 @Service
 public class WeatherService {
@@ -27,6 +32,10 @@ public class WeatherService {
         WeatherEntity weatherEntity = new WeatherEntity(wb.getWeather());
 
         weatherRepository.save(weatherEntity);
+    }
+
+    public List<WeatherEntity> getWeatherData(){
+        return weatherRepository.findAll();
     }
 }
 

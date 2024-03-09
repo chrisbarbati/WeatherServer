@@ -7,9 +7,9 @@ public class Weather {
     /**
      * Model class to hold information about the current weather data.
      */
-    private double temperature;
-    private double humidity;
-    private double pressure;
+    private Double temperature;
+    private Double humidity;
+    private Double pressure;
 
     private TempUnits tempUnit;
     private PressureUnits pressureUnit;
@@ -35,7 +35,7 @@ public class Weather {
         setPressureUnit(pressureUnit);
     }
 
-    public double getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
@@ -43,7 +43,7 @@ public class Weather {
         this.temperature = temperature;
     }
 
-    public double getHumidity() {
+    public Double getHumidity() {
         return humidity;
     }
 
@@ -51,7 +51,7 @@ public class Weather {
         this.humidity = humidity;
     }
 
-    public double getPressure() {
+    public Double getPressure() {
         return pressure;
     }
 
