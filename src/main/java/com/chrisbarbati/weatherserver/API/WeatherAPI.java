@@ -2,7 +2,10 @@ package com.chrisbarbati.weatherserver.API;
 
 import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
 import com.chrisbarbati.weatherserver.Builder.WeatherBuilderInterface;
+import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
+import com.chrisbarbati.weatherserver.Services.WeatherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**

@@ -14,6 +14,13 @@ public class Weather {
     private TempUnits tempUnit;
     private PressureUnits pressureUnit;
 
+    /**
+     * Default constructor required for Entity class
+     */
+    public Weather(){
+
+    }
+
     public Weather(double temperature, double humidity, double pressure){
         setTemperature(temperature);
         setHumidity(humidity);
