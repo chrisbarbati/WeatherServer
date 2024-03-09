@@ -9,13 +9,12 @@ The Weather Server's primary functionality is to respond to GET requests by retr
 
 I have recently added some additional functionality:
 
-- Connection to local MariaDB database (MySQL compatible)
+- Local MariaDB SQL database
 - Hibernate ORM Framework
 - WeatherEntity objects, allowing storage of weather data
 - Repository, Service, and Scheduler classes
 - Regular (10 minute interval) insertion of weather records into the database
 - New API endpoint at /weather/past that returns all past record data as JSON
-- Split application.properties into second untracked file developer.properties, to hold sensitive values (database logins)
 
 ## Planned Features
 
