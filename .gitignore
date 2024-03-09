@@ -14,7 +14,7 @@ target/
 .sts4-cache
 
 ### Remove the application.properties file, as it includes SQL credentials
-*.properties
+developer.properties
 
 #SSL Key
 .p12
