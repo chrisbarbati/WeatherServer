@@ -34,8 +34,20 @@ public class WeatherService {
         weatherRepository.save(weatherEntity);
     }
 
+    /**
+     *
+     * @return A list of all WeatherEntity objects
+     */
     public List<WeatherEntity> getWeatherData(){
         return weatherRepository.findAll();
+    }
+
+    /**
+     * Hibernate ORM will handle the sorting of the data based on the naming convention.
+     * @return A list of all WeatherEntity objects sorted by date in descending order.
+     */
+    public List<WeatherEntity> getWeatherDataByDateDescending(){
+        return weatherRepository.findAllByOrderByDstampDesc();
     }
 }
 

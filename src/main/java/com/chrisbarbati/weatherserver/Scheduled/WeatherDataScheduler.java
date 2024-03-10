@@ -24,7 +24,7 @@ public class WeatherDataScheduler {
         this.weatherService = weatherService;
     }
 
-    @Scheduled(fixedRate = 600000) //Take a sample every 10 minutes and save to database
+    @Scheduled(cron = "0 */10 * * * *") // Run every 10 minutes on the minute
     public void saveWeatherData() {
         log.info("Saving weather data to database");
 

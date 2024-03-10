@@ -38,7 +38,7 @@ public class WeatherAPI {
 
     @GetMapping("/weather/past")
     public List<WeatherEntity> getWeatherData(){
-        return weatherService.getWeatherData();
+        return weatherService.getWeatherDataByDateDescending();
     }
 
 }

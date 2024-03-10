@@ -2,6 +2,7 @@ package com.chrisbarbati.weatherserver.Entities;
 
 import com.chrisbarbati.weatherserver.Models.Weather;
 import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Date;
 public class WeatherEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore //Don't want the ID field returned with the data as it is essentially meaningless to the user.
     @Column(nullable = false, name="id")
     private int id;
 
@@ -47,6 +49,7 @@ public class WeatherEntity{
         setDstamp(new Date());
     }
 
+    @JsonIgnore
     public int getId() {
         return id;
     }

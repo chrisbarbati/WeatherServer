@@ -4,6 +4,9 @@ import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+
 /**
  * Repository class to handle database operations for the WeatherEntity class.
  *
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WeatherRepository extends JpaRepository<WeatherEntity, Integer> {
+    public List<WeatherEntity> findAllByOrderByDstampDesc();
 
-    //Custom queries will be added here later
+    public List<WeatherEntity> findAllByOrderByDstampAsc();
+
 }
