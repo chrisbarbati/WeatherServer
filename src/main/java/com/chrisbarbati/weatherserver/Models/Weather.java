@@ -24,13 +24,33 @@ public class Weather {
 
     }
 
+    /**
+     * Constructor to create a Weather object with temperature, humidity, and pressure.
+     *
+     * Takes no arguments for units, defaults to Celsius and Millibar
+     *
+     * @param temperature Temperature in degrees Celsius
+     * @param humidity % Relative Humidity
+     * @param pressure Pressure in Millibar
+     */
     public Weather(double temperature, double humidity, double pressure){
         setTemperature(temperature);
         setHumidity(humidity);
         setPressure(pressure);
         setDstamp(new Date());
+        setTempUnit(TempUnits.CELSIUS);
+        setPressureUnit(PressureUnits.MILLIBAR);
     }
 
+    /**
+     * Fully parameterized constructor
+     *
+     * @param temperature Temperature in the specified units
+     * @param humidity % Relative Humidity
+     * @param pressure Pressure in the specified units
+     * @param tempUnit Units for temperature
+     * @param pressureUnit Units for pressure
+     */
     public Weather(double temperature, double humidity, double pressure, TempUnits tempUnit, PressureUnits pressureUnit){
         setTemperature(temperature);
         setHumidity(humidity);

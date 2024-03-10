@@ -1,7 +1,6 @@
 package com.chrisbarbati.weatherserver.Entities;
 
 import com.chrisbarbati.weatherserver.Models.Weather;
-import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -35,10 +34,20 @@ public class WeatherEntity{
     @Column(nullable = false, name="dstamp")
     Date dstamp;
 
+    /**
+     * Default constructor for Hibernate
+     */
     public WeatherEntity(){
         super();
     }
 
+    /**
+     * Constructor to create a WeatherEntity from a Weather object
+     *
+     * @param weather Weather object to create the WeatherEntity from
+     *
+     * TODO: Probably better done using a Builder pattern. Will refactor later.
+     */
     public WeatherEntity(Weather weather){
         super();
 
