@@ -48,5 +48,15 @@ public class WeatherService {
     public List<WeatherEntity> getWeatherDataByDateDescending(){
         return weatherRepository.findAllByOrderByDstampDesc();
     }
+
+    /**
+     * Gets the last hour of weather data, 10 minute intervals
+     * @return
+     */
+    public List<WeatherEntity> getWeatherDataLastHour(){
+        List<WeatherEntity> weatherData = weatherRepository.findAllByOrderByDstampDesc();
+
+        return weatherRepository.findAllByOrderByDstampDesc().subList(0, 6);
+    }
 }
 

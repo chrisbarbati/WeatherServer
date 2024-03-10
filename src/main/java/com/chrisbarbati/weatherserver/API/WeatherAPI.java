@@ -4,7 +4,9 @@ import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
 import com.chrisbarbati.weatherserver.Builder.WeatherBuilderInterface;
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
+import com.chrisbarbati.weatherserver.Models.WeatherForecast;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
+import com.chrisbarbati.weatherserver.Utils.WeatherUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +52,16 @@ public class WeatherAPI {
     @GetMapping("/weather/past")
     public List<WeatherEntity> getWeatherData(){
         return weatherService.getWeatherDataByDateDescending();
+    }
+
+    /**
+     * TODO: Experimental. Returns forecast information.
+     *
+     * @return Weather forecast information
+     */
+    @GetMapping("/weather/forecast")
+    public WeatherForecast getWeatherForecast(){
+        return new WeatherForecast();
     }
 
 }
