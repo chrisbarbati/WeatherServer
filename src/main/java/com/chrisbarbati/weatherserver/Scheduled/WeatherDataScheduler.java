@@ -9,8 +9,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * Class that handles the scheduling of weather data.
+ * Scheduler class.
  *
+ * Any task that must run at a specific time or interval can be scheduled here.
  */
 
 @Component
@@ -24,7 +25,13 @@ public class WeatherDataScheduler {
         this.weatherService = weatherService;
     }
 
-    @Scheduled(fixedRate = 600000) //Take a sample every 10 minutes and save to database
+    /**
+     * Save weather data to the database every 10 minutes.
+     *
+     * cron = ... represents making entries at ten minute intervals,
+     * starting at the top of the hour
+     */
+    @Scheduled(cron = "0 */10 * * * *") // Run every 10 minutes on the minute
     public void saveWeatherData() {
         log.info("Saving weather data to database");
 

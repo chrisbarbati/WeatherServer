@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service class to handle the weather data.
+ * Service class to handle the WeatherRepository and WeatherEntity objects
+ *
+ * Provides methods to save and retrieve weather data that will be
+ * called by the API controller
  */
 
 @Service
@@ -25,6 +27,11 @@ public class WeatherService {
         this.weatherRepository = weatherRepository;
     }
 
+    /**
+     * Saves current weather data to the database
+     *
+     * @param weather Weather object to save
+     */
     @Transactional
     public void saveWeatherData(Weather weather) {
         WeatherBuilderInterface wb = new WeatherBuilder();
@@ -34,8 +41,12 @@ public class WeatherService {
         weatherRepository.save(weatherEntity);
     }
 
-    public List<WeatherEntity> getWeatherData(){
-        return weatherRepository.findAll();
+    /**
+     * Hibernate ORM will handle the sorting of the data based on the naming convention.
+     * @return A list of all WeatherEntity objects sorted by date in descending order.
+     */
+    public List<WeatherEntity> getWeatherDataByDateDescending(){
+        return weatherRepository.findAllByOrderByDstampDesc();
     }
 }
 

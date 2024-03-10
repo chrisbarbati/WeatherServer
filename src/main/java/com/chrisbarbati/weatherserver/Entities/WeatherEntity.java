@@ -1,7 +1,7 @@
 package com.chrisbarbati.weatherserver.Entities;
 
 import com.chrisbarbati.weatherserver.Models.Weather;
-import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -17,6 +17,7 @@ import java.util.Date;
 public class WeatherEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore //Don't want the ID field returned with the data as it is essentially meaningless to the user.
     @Column(nullable = false, name="id")
     private int id;
 
@@ -33,10 +34,20 @@ public class WeatherEntity{
     @Column(nullable = false, name="dstamp")
     Date dstamp;
 
+    /**
+     * Default constructor for Hibernate
+     */
     public WeatherEntity(){
         super();
     }
 
+    /**
+     * Constructor to create a WeatherEntity from a Weather object
+     *
+     * @param weather Weather object to create the WeatherEntity from
+     *
+     * TODO: Probably better done using a Builder pattern. Will refactor later.
+     */
     public WeatherEntity(Weather weather){
         super();
 
@@ -47,6 +58,7 @@ public class WeatherEntity{
         setDstamp(new Date());
     }
 
+    @JsonIgnore
     public int getId() {
         return id;
     }
