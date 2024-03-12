@@ -47,6 +47,15 @@ GET /API/weather/past
 
 This endpoint returns a JSON object representing all past historical data, stored in ten minute intervals. This feature is currently in development and there may be changes in the near future.
 
+## **Experimental - Weather Forecast **
+
+There is an endpoint that will return a WeatherForecast object as JSON:
+
+```
+GET /API/weather/forecast
+```
+At present this feature is still in development. It currently returns the rate of change in barometric pressure (simple linear calculation over the past hour of data, and the slope of a quadratic equation fit to the past hour of data at the time of the last sample). Decreasing barometric pressure typically indicates precipitation, and increasing barometric pressure typically means clearer conditions.
+
 ## Purpose
 
 This repository serves as a demonstration of implementing a basic RESTful API using Spring Boot to retrieve sensor data from the SenseHAT on a Raspberry Pi. It showcases familiarity with Spring Boot as well as general object-oriented programming and software development skills.
