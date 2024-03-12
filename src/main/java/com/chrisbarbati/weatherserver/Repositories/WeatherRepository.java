@@ -4,6 +4,7 @@ import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,8 +23,10 @@ public interface WeatherRepository extends JpaRepository<WeatherEntity, Integer>
     public List<WeatherEntity> findAllByOrderByDstampDesc();
 
     /**
-     * @return A list of all WeatherEntity objects sorted by date in ascending order.
+     * Get weather data from within a given date range
+     * @param start Date object representing the start of the date range
+     * @param end Date object representing the end of the date range
+     * @return
      */
-    public List<WeatherEntity> findAllByOrderByDstampAsc();
-
+    public List<WeatherEntity> findByDstampBetweenOrderByDstampDesc(Date start, Date end);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,9 +55,10 @@ public class WeatherService {
      * @return
      */
     public List<WeatherEntity> getWeatherDataLastHour(){
-        List<WeatherEntity> weatherData = weatherRepository.findAllByOrderByDstampDesc();
-
-        return weatherRepository.findAllByOrderByDstampDesc().subList(0, 6);
+        Date currentTime = new Date();
+        Date oneHourAgo = new Date(currentTime.getTime() - 3600000);
+        return weatherRepository.findByDstampBetweenOrderByDstampDesc(oneHourAgo, currentTime);
+        //return weatherRepository.findFirst6ByOrderByDstampDesc();
     }
 }
 
