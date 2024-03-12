@@ -31,7 +31,7 @@ public class WeatherDataScheduler {
      * cron = ... represents making entries at ten minute intervals,
      * starting at the top of the hour
      */
-    @Scheduled(cron = "0 */10 * * * *") // Run every 10 minutes on the minute
+    @Scheduled(cron = "0 */1 * * * *") // Run every 1 minute, on the minute
     public void saveWeatherData() {
         log.info("Saving weather data to database");
 
