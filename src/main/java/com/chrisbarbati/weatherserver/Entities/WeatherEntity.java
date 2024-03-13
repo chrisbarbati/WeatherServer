@@ -35,27 +35,9 @@ public class WeatherEntity{
     Date dstamp;
 
     /**
-     * Default constructor for Hibernate
+     * Default constructor
      */
     public WeatherEntity(){
-        super();
-    }
-
-    /**
-     * Constructor to create a WeatherEntity from a Weather object
-     *
-     * @param weather Weather object to create the WeatherEntity from
-     *
-     * TODO: Probably better done using a Builder pattern. Will refactor later.
-     */
-    public WeatherEntity(Weather weather){
-        super();
-
-        setTemperature(weather.getTemperature());
-        setHumidity(weather.getHumidity());
-        setPressure(weather.getPressure());
-
-        setDstamp(new Date());
     }
 
     @JsonIgnore

@@ -40,8 +40,7 @@ public class WeatherUtils {
     public Double getBaroSlopeHourlyLinear(){
         List<WeatherEntity> hourlyData = weatherService.getWeatherDataLastHour();
 
-        System.out.println("Hourly data size: " + hourlyData.size());
-        log.info("Hourly data size: " + hourlyData.size());
+        log.debug("Hourly data size: " + hourlyData.size());
 
         //Uses the Apache Commons Math library
         SimpleRegression regression = new SimpleRegression();

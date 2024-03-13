@@ -2,6 +2,8 @@ package com.chrisbarbati.weatherserver.Services;
 
 import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
 import com.chrisbarbati.weatherserver.Builder.WeatherBuilderInterface;
+import com.chrisbarbati.weatherserver.Builder.WeatherEntityBuilder;
+import com.chrisbarbati.weatherserver.Builder.WeatherEntityBuilderInterface;
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
 import com.chrisbarbati.weatherserver.Repositories.WeatherRepository;
@@ -35,11 +37,9 @@ public class WeatherService {
      */
     @Transactional
     public void saveWeatherData(Weather weather) {
-        WeatherBuilderInterface wb = new WeatherBuilder();
+        WeatherEntityBuilderInterface web = new WeatherEntityBuilder();
 
-        WeatherEntity weatherEntity = new WeatherEntity(wb.getWeather());
-
-        weatherRepository.save(weatherEntity);
+        weatherRepository.save(web.getWeatherEntity());
     }
 
     /**
@@ -51,14 +51,13 @@ public class WeatherService {
     }
 
     /**
-     * Gets the last hour of weather data, 10 minute intervals
-     * @return
+     * Gets the last hour of weather data
+     * @return A list of WeatherEntity objects from the last hour
      */
     public List<WeatherEntity> getWeatherDataLastHour(){
         Date currentTime = new Date();
         Date oneHourAgo = new Date(currentTime.getTime() - 3600000);
         return weatherRepository.findByDstampBetweenOrderByDstampDesc(oneHourAgo, currentTime);
-        //return weatherRepository.findFirst6ByOrderByDstampDesc();
     }
 }
 
