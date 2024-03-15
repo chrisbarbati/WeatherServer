@@ -3,13 +3,18 @@ package com.chrisbarbati.weatherserver.Builder;
 import com.chrisbarbati.SenseHAT.*;
 import com.chrisbarbati.SenseHAT.Units.*;
 import com.chrisbarbati.weatherserver.Models.Weather;
+import org.springframework.stereotype.Component;
 
 /**
  * Builder class to create a Weather object.
  *
  * Built out as a separate class to make it easier to modify WeatherAPI in the future. Unlikely to be
  * necessary, but it's good practice to separate duties
+ *
+ * Annotated @Component so it can be injected
  */
+
+@Component
 public class WeatherBuilder implements WeatherBuilderInterface {
 
     /**

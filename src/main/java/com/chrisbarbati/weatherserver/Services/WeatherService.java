@@ -1,8 +1,5 @@
 package com.chrisbarbati.weatherserver.Services;
 
-import com.chrisbarbati.weatherserver.Builder.WeatherBuilder;
-import com.chrisbarbati.weatherserver.Builder.WeatherBuilderInterface;
-import com.chrisbarbati.weatherserver.Builder.WeatherEntityBuilder;
 import com.chrisbarbati.weatherserver.Builder.WeatherEntityBuilderInterface;
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
@@ -24,10 +21,12 @@ import java.util.List;
 @Service
 public class WeatherService {
     private final WeatherRepository weatherRepository;
+    private final WeatherEntityBuilderInterface weatherEntityBuilder;
 
     @Autowired
-    public WeatherService(WeatherRepository weatherRepository) {
+    public WeatherService(WeatherRepository weatherRepository, WeatherEntityBuilderInterface weatherEntityBuilder) {
         this.weatherRepository = weatherRepository;
+        this.weatherEntityBuilder = weatherEntityBuilder;
     }
 
     /**
@@ -37,9 +36,7 @@ public class WeatherService {
      */
     @Transactional
     public void saveWeatherData(Weather weather) {
-        WeatherEntityBuilderInterface web = new WeatherEntityBuilder();
-
-        weatherRepository.save(web.getWeatherEntity());
+        weatherRepository.save(weatherEntityBuilder.getWeatherEntity());
     }
 
     /**

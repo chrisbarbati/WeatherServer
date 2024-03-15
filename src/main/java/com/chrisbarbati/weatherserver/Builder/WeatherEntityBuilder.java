@@ -2,13 +2,17 @@ package com.chrisbarbati.weatherserver.Builder;
 
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 /**
  * Abstract Builder class to create a WeatherEntity object.
+ *
+ * Annotated as a Component to allow for dependency injection.
  */
 
+@Component
 public class WeatherEntityBuilder implements WeatherEntityBuilderInterface{
 
     /**

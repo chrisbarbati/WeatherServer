@@ -1,11 +1,8 @@
 package com.chrisbarbati.weatherserver.Utils;
 
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
-import com.chrisbarbati.weatherserver.Models.Weather;
-import com.chrisbarbati.weatherserver.Scheduled.WeatherDataScheduler;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
-import org.apache.commons.math3.fitting.WeightedObservedPoint;
 import org.apache.commons.math3.fitting.WeightedObservedPoints;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.slf4j.Logger;
