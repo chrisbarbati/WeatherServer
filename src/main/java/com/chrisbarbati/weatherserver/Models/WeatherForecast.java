@@ -9,26 +9,19 @@ import java.util.Date;
 /**
  * Model class to hold information about the weather forecast
  */
-@Component
 public class WeatherForecast {
-    private static WeatherUtils weatherUtils;
     private Date date;
-
-    @Autowired
-    public WeatherForecast(WeatherUtils weatherUtils){
-        this.weatherUtils = weatherUtils;
-
-    }
-
-    public WeatherForecast(){
-        date = new Date();
-        baroSlopeHourlyLinear = weatherUtils.getBaroSlopeHourlyLinear();
-        baroSlopeHourlyQuadratic = weatherUtils.getBaroSlopeHourlyPolynomial();
-    }
-
-    //Experimental - Using both methods for now to see which I prefer
     private Double baroSlopeHourlyLinear;
     private Double baroSlopeHourlyQuadratic;
+
+    /**
+     * Default constructor simply sets the date.
+     *
+     * The slope values are set by the WeatherForecastBuilder class to decouple the classes.
+     */
+    public WeatherForecast(){
+        date = new Date();
+    }
 
     /**
      * Getters and setters

@@ -1,6 +1,7 @@
 package com.chrisbarbati.weatherserver.API;
 
 import com.chrisbarbati.weatherserver.Builder.WeatherBuilderInterface;
+import com.chrisbarbati.weatherserver.Builder.WeatherForecastBuilderInterface;
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
 import com.chrisbarbati.weatherserver.Models.WeatherForecast;
@@ -21,11 +22,13 @@ public class WeatherAPI {
 
     private WeatherService weatherService;
     private WeatherBuilderInterface weatherBuilder;
+    private WeatherForecastBuilderInterface weatherForecastBuilder;
 
     @Autowired
-    public WeatherAPI(WeatherService weatherService, WeatherBuilderInterface weatherBuilder){
+    public WeatherAPI(WeatherService weatherService, WeatherBuilderInterface weatherBuilder, WeatherForecastBuilderInterface weatherForecastBuilder){
         this.weatherService = weatherService;
         this.weatherBuilder = weatherBuilder;
+        this.weatherForecastBuilder = weatherForecastBuilder;
     }
 
     /**
@@ -56,7 +59,7 @@ public class WeatherAPI {
      */
     @GetMapping("/weather/forecast")
     public WeatherForecast getWeatherForecast(){
-        return new WeatherForecast();
+        return weatherForecastBuilder.getWeatherForecast();
     }
 
 }

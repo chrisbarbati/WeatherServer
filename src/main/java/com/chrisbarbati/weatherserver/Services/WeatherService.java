@@ -2,11 +2,12 @@ package com.chrisbarbati.weatherserver.Services;
 
 import com.chrisbarbati.weatherserver.Builder.WeatherEntityBuilderInterface;
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
-import com.chrisbarbati.weatherserver.Models.Weather;
 import com.chrisbarbati.weatherserver.Repositories.WeatherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 public class WeatherService {
     private final WeatherRepository weatherRepository;
     private final WeatherEntityBuilderInterface weatherEntityBuilder;
+    private static final Logger log = LoggerFactory.getLogger(WeatherService.class);
 
     @Autowired
     public WeatherService(WeatherRepository weatherRepository, WeatherEntityBuilderInterface weatherEntityBuilder) {
@@ -31,12 +33,14 @@ public class WeatherService {
 
     /**
      * Saves current weather data to the database
-     *
-     * @param weather Weather object to save
      */
     @Transactional
-    public void saveWeatherData(Weather weather) {
-        weatherRepository.save(weatherEntityBuilder.getWeatherEntity());
+    public void saveWeatherData() {
+        try {
+            weatherRepository.save(weatherEntityBuilder.getWeatherEntity());
+        } catch (DataAccessException e) {
+            log.error("Error saving weather data", e);
+        }
     }
 
     /**

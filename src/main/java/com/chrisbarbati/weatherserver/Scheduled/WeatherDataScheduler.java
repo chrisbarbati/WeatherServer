@@ -17,14 +17,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class WeatherDataScheduler {
     private final WeatherService weatherService;
-    private final WeatherBuilderInterface weatherBuilder;
 
     private static final Logger log = LoggerFactory.getLogger(WeatherDataScheduler.class);
 
     @Autowired
-    public WeatherDataScheduler(WeatherService weatherService, WeatherBuilderInterface weatherBuilder) {
+    public WeatherDataScheduler(WeatherService weatherService) {
         this.weatherService = weatherService;
-        this.weatherBuilder = weatherBuilder;
     }
 
     /**
@@ -37,6 +35,6 @@ public class WeatherDataScheduler {
     public void saveWeatherData() {
         log.info("Saving weather data to database");
 
-        weatherService.saveWeatherData(weatherBuilder.getWeather());
+        weatherService.saveWeatherData();
     }
 }
