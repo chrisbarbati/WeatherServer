@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Interface to define the methods for the WeatherEntityBuilder class
+ * Builder class to create a WeatherForecast object.
  */
 @Component
 public class WeatherForecastBuilder implements WeatherForecastBuilderInterface{

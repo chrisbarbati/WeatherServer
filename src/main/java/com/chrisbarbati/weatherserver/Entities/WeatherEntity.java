@@ -1,6 +1,5 @@
 package com.chrisbarbati.weatherserver.Entities;
 
-import com.chrisbarbati.weatherserver.Models.Weather;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -39,6 +38,22 @@ public class WeatherEntity{
      */
     public WeatherEntity(){
     }
+
+    /**
+     * Override the toString method
+     * @return String representation of the WeatherEntity object
+     */
+    @Override
+    public String toString(){
+        return "Temperature: " + getTemperature() +
+                "Humidity: " + getHumidity() +
+                "Pressure: " + getPressure() +
+                "Date: " + getDstamp();
+    }
+
+    /**
+     * Getters and setters
+     */
 
     @JsonIgnore
     public int getId() {

@@ -3,11 +3,11 @@ package com.chrisbarbati.weatherserver.Services;
 import com.chrisbarbati.weatherserver.Builder.WeatherEntityBuilderInterface;
 import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Repositories.WeatherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +29,8 @@ public class WeatherService {
     public WeatherService(WeatherRepository weatherRepository, WeatherEntityBuilderInterface weatherEntityBuilder) {
         this.weatherRepository = weatherRepository;
         this.weatherEntityBuilder = weatherEntityBuilder;
+
+        log.info("WeatherService created");
     }
 
     /**
@@ -36,11 +38,11 @@ public class WeatherService {
      */
     @Transactional
     public void saveWeatherData() {
-        try {
-            weatherRepository.save(weatherEntityBuilder.getWeatherEntity());
-        } catch (DataAccessException e) {
-            log.error("Error saving weather data", e);
-        }
+        WeatherEntity weatherEntity = weatherEntityBuilder.getWeatherEntity();
+
+        weatherRepository.save(weatherEntity);
+
+        log.info("Saving weather data: " + weatherEntity.toString());
     }
 
     /**
@@ -48,7 +50,9 @@ public class WeatherService {
      * @return A list of all WeatherEntity objects sorted by date in descending order.
      */
     public List<WeatherEntity> getWeatherDataByDateDescending(){
-        return weatherRepository.findAllByOrderByDstampDesc();
+        List<WeatherEntity> weatherData = weatherRepository.findAllByOrderByDstampDesc();
+        log.info("Weather data retrieved: " + weatherData.size() + " records");
+        return weatherData;
     }
 
     /**
@@ -58,7 +62,12 @@ public class WeatherService {
     public List<WeatherEntity> getWeatherDataLastHour(){
         Date currentTime = new Date();
         Date oneHourAgo = new Date(currentTime.getTime() - 3600000);
-        return weatherRepository.findByDstampBetweenOrderByDstampDesc(oneHourAgo, currentTime);
+
+        List<WeatherEntity> weatherData = weatherRepository.findByDstampBetweenOrderByDstampDesc(oneHourAgo, currentTime);
+
+        log.info("Weather data from the last hour retrieved: " + weatherData.size() + " records");
+
+        return weatherData;
     }
 }
 

@@ -6,6 +6,8 @@ import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
 import com.chrisbarbati.weatherserver.Models.Weather;
 import com.chrisbarbati.weatherserver.Models.WeatherForecast;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +26,15 @@ public class WeatherAPI {
     private WeatherBuilderInterface weatherBuilder;
     private WeatherForecastBuilderInterface weatherForecastBuilder;
 
+    private static Logger log = LoggerFactory.getLogger(WeatherAPI.class);
+
     @Autowired
     public WeatherAPI(WeatherService weatherService, WeatherBuilderInterface weatherBuilder, WeatherForecastBuilderInterface weatherForecastBuilder){
         this.weatherService = weatherService;
         this.weatherBuilder = weatherBuilder;
         this.weatherForecastBuilder = weatherForecastBuilder;
+
+        log.info("WeatherAPI initialized");
     }
 
     /**
@@ -39,7 +45,9 @@ public class WeatherAPI {
      */
     @GetMapping("/weather")
     public Weather getWeather(@RequestParam(value = "temp-unit", required = false) String tempUnit, @RequestParam(value = "pressure-unit", required = false) String pressureUnit){
-        return weatherBuilder.getWeather(tempUnit, pressureUnit);
+        Weather weather = weatherBuilder.getWeather(tempUnit, pressureUnit);
+        log.info("Weather data retrieved: " + weather.toString());
+        return weather;
     }
 
     /**
@@ -49,7 +57,9 @@ public class WeatherAPI {
      */
     @GetMapping("/weather/past")
     public List<WeatherEntity> getWeatherData(){
-        return weatherService.getWeatherDataByDateDescending();
+        List<WeatherEntity> weatherData = weatherService.getWeatherDataByDateDescending();
+        log.info("Weather data retrieved: " + weatherData.toString());
+        return weatherData;
     }
 
     /**
@@ -59,7 +69,9 @@ public class WeatherAPI {
      */
     @GetMapping("/weather/forecast")
     public WeatherForecast getWeatherForecast(){
-        return weatherForecastBuilder.getWeatherForecast();
+        WeatherForecast weatherForecast = weatherForecastBuilder.getWeatherForecast();
+        log.info("Weather forecast retrieved " + weatherForecast.toString());
+        return weatherForecast;
     }
 
 }

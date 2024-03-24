@@ -1,7 +1,8 @@
 package com.chrisbarbati.weatherserver.Builder;
 
-import com.chrisbarbati.SenseHAT.*;
-import com.chrisbarbati.SenseHAT.Units.*;
+import com.chrisbarbati.SenseHAT.SenseHAT;
+import com.chrisbarbati.SenseHAT.Units.PressureUnits;
+import com.chrisbarbati.SenseHAT.Units.TempUnits;
 import com.chrisbarbati.weatherserver.Models.Weather;
 import org.springframework.stereotype.Component;
 

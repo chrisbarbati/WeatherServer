@@ -60,6 +60,22 @@ public class Weather {
         setDstamp(new Date());
     }
 
+    /**
+     * Override the toString method
+     * @return String representation of the Weather object
+     */
+    @Override
+    public String toString(){
+        return "Temperature: " + getTemperature() +
+                "Humidity: " + getHumidity() +
+                "Pressure: " + getPressure() +
+                "Date: " + getDstamp();
+    }
+
+    /**
+     * Getters and setters
+     */
+
     public Double getTemperature() {
         return temperature;
     }

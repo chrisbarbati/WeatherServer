@@ -1,9 +1,5 @@
 package com.chrisbarbati.weatherserver.Models;
 
-import com.chrisbarbati.weatherserver.Utils.WeatherUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.Date;
 
 /**
@@ -21,6 +17,10 @@ public class WeatherForecast {
      */
     public WeatherForecast(){
         date = new Date();
+    }
+
+    public String toString(){
+        return "Date: " + date + ", Linear Slope of Baro: " + baroSlopeHourlyLinear + ", Quadratic Slope of Baro: " + baroSlopeHourlyQuadratic;
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.chrisbarbati.weatherserver.Scheduled;
 
-import com.chrisbarbati.weatherserver.Builder.WeatherBuilderInterface;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
