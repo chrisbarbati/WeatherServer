@@ -6,6 +6,8 @@ import com.chrisbarbati.weatherserver.Repositories.WeatherRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -37,6 +39,7 @@ public class WeatherService {
      * Saves current weather data to the database
      */
     @Transactional
+    @CacheEvict(value = {"weatherDataByDateDescending", "weatherDataLastHour"}, allEntries = true)
     public void saveWeatherData() {
         WeatherEntity weatherEntity = weatherEntityBuilder.getWeatherEntity();
 
@@ -47,8 +50,14 @@ public class WeatherService {
 
     /**
      * Hibernate ORM will handle the sorting of the data based on the naming convention.
+     *
+     * Implements caching to reduce the number of calls to the database. Unlikely
+     * to matter for my demonstration purposes, but could be useful in a production
+     * application where the data is queried more frequently.
+     *
      * @return A list of all WeatherEntity objects sorted by date in descending order.
      */
+    @Cacheable("weatherDataByDateDescending")
     public List<WeatherEntity> getWeatherDataByDateDescending(){
         List<WeatherEntity> weatherData = weatherRepository.findAllByOrderByDstampDesc();
         log.info("Weather data retrieved: " + weatherData.size() + " records");
@@ -56,9 +65,15 @@ public class WeatherService {
     }
 
     /**
-     * Gets the last hour of weather data
+     * Gets the last hour of weather data.
+     *
+     * Implements caching to reduce the number of calls to the database. Unlikely
+     * to matter for my demonstration purposes, but could be useful in a production
+     * application where the data is queried more frequently.
+     *
      * @return A list of WeatherEntity objects from the last hour
      */
+    @Cacheable("weatherDataLastHour")
     public List<WeatherEntity> getWeatherDataLastHour(){
         Date currentTime = new Date();
         Date oneHourAgo = new Date(currentTime.getTime() - 3600000);

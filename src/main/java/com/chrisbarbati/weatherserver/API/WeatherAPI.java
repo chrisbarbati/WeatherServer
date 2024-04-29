@@ -53,7 +53,9 @@ public class WeatherAPI {
     /**
      * Gets all of the past weather records
      *
-     * @return Past weather records, sorted by date in descending order.
+     * TODO: Add parameters to filter the data
+     *
+     * @return Past hour of weather data
      */
     @GetMapping("/weather/past")
     public List<WeatherEntity> getWeatherData(){
@@ -61,6 +63,19 @@ public class WeatherAPI {
         log.info("Weather data retrieved: " + weatherData.toString());
         return weatherData;
     }
+
+    /**
+     * Gets the weather data from the past hour
+     *
+     * @return Weather data from the past hour
+     */
+    @GetMapping("/weather/pasthour")
+    public List<WeatherEntity> getWeatherDataPastHour(){
+        List<WeatherEntity> weatherData = weatherService.getWeatherDataLastHour();
+        log.info("Weather data retrieved: " + weatherData.toString());
+        return weatherData;
+    }
+
 
     /**
      * TODO: Experimental. Returns forecast information.
