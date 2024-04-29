@@ -9,12 +9,13 @@ The Weather Server's primary functionality is to respond to GET requests by retr
 
 I have recently added some additional functionality:
 
-- Local MariaDB SQL database
-- Hibernate ORM Framework
-- WeatherEntity objects, allowing storage of weather data
-- Repository, Service, and Scheduler classes
-- Regular (10 minute interval) insertion of weather records into the database
-- New API endpoint at /weather/past that returns all past record data as JSON
+ - RESTful API endpoint returning the current weather conditions
+ - Connection to local MariaDB database
+ - Hibernate ORM Framework
+ - Regular (10 minute interval) insertion of weather records into the database
+ - Unit tests with JUnit, logging
+ - Caching to improve performance and reduce database load for subsequent calls
+ - New API endpoints at /API/weather/past and /API/weather/pasthour that return past weather data as JSON
 
 ## Planned Features
 
@@ -27,6 +28,12 @@ Send a GET request to retrieve the weather information:
 
 ```
 GET /API/weather
+```
+
+Or to the following endpoint to receive the last hour of information as JSON:
+
+```
+GET /API/weather/pasthour
 ```
 
 The default units are degrees Celsius and pressure in Millibar, but adding request parameters will allow you to select other units if desired:
