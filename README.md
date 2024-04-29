@@ -60,10 +60,13 @@ At present this feature is still in development. It currently returns the rate o
 
 This repository serves as a demonstration of implementing a basic RESTful API using Spring Boot to retrieve sensor data from the SenseHAT on a Raspberry Pi. It showcases familiarity with Spring Boot as well as general object-oriented programming and software development skills.
 
+## Testing
+
+Unit tests are included wherever possible. The only methods not tested are those that would fail due to my compiling on Windows hardware (IntelliJ remote development does not work on my Raspberry Pi for some reason, so I develop locally). For example, methods that cause an I2C read to occur will always fail as my Thinkpad does not have an I2C bus.
+
 ## Acknowledgment
 
 This project utilizes the [SenseHATI2C](https://github.com/chrisbarbati/SenseHatI2C/tree/main) library, authored by myself, to interface with SenseHAT sensors.
 
 ---
-
-This project is created to showcase Spring Boot skills and is intentionally kept straightforward. For any questions or feedback, please contact [Christian Barbati](mailto:chris.barbati@gmail.com)
+For any questions or feedback, please contact [Christian Barbati](mailto:chris.barbati@gmail.com)
