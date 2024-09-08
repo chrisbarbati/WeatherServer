@@ -10,9 +10,9 @@ The Weather Server's primary functionality is to respond to GET requests by retr
 I have recently added some additional functionality:
 
  - RESTful API endpoint returning the current weather conditions
- - Connection to local MariaDB database
+ - WebSocket endpoint providing streaming data at 1s intervals
  - Hibernate ORM Framework
- - Regular (10 minute interval) insertion of weather records into the database
+ - Regular (10 minute interval) insertion of weather records into local MariaDB database
  - Unit tests with JUnit, logging
  - Caching to improve performance and reduce database load for subsequent calls
  - New API endpoints at /API/weather/past and /API/weather/pasthour that return past weather data as JSON
