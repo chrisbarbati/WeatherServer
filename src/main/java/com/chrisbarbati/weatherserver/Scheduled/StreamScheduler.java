@@ -21,8 +21,8 @@ public class StreamScheduler {
         this.weatherBuilder = weatherBuilder;
     }
 
-    // Stream weather data every minute, on the minute
-    @Scheduled(cron = "0 */1 * * * *")
+    // Stream weather data every second
+    @Scheduled(cron = "* * * * * *")
     public void streamWeatherData() throws Exception {
         Weather weather = weatherBuilder.getWeather();
         myWebSocketHandler.broadcastWeather(weather);

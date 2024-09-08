@@ -73,6 +73,28 @@ public class Weather {
     }
 
     /**
+     * Override the equals method
+     *
+     * @param o Weather object to compare
+     * @return True if the objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o){
+        // True if object is compared to itself
+        if (this == o) return true;
+
+        // False if object is null, or is not an instance of the Weather class
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Weather weather = (Weather) o;
+
+        //Note: DSTAMP is not included in the equals method, as it is not a part of the data that is compared
+        return this.getTemperature().equals(weather.getTemperature()) &&
+                this.getHumidity().equals(weather.getHumidity()) &&
+                this.getPressure().equals(weather.getPressure());
+    }
+
+    /**
      * Getters and setters
      */
 
