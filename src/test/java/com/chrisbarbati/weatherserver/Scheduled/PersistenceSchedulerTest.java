@@ -14,10 +14,10 @@ import java.util.concurrent.ScheduledFuture;
 
 import static org.mockito.Mockito.*;
 
-public class WeatherDataSchedulerTest {
+public class PersistenceSchedulerTest {
 
     @InjectMocks
-    private WeatherDataScheduler weatherDataScheduler;
+    private PersistenceScheduler persistenceScheduler;
 
     @Mock
     private WeatherService weatherService;
@@ -43,7 +43,7 @@ public class WeatherDataSchedulerTest {
     public void shouldScheduleWeatherDataSavingTask() {
         doReturn(scheduledFuture).when(taskScheduler).schedule(any(Runnable.class), any(CronTrigger.class));
 
-        weatherDataScheduler.saveWeatherData();
+        persistenceScheduler.saveWeatherData();
 
         verify(weatherService, times(1)).saveWeatherData();
     }

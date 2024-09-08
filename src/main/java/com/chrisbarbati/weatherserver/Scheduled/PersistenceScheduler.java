@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class WeatherDataScheduler {
+public class PersistenceScheduler {
     private final WeatherService weatherService;
 
-    private static final Logger log = LoggerFactory.getLogger(WeatherDataScheduler.class);
+    private static final Logger log = LoggerFactory.getLogger(PersistenceScheduler.class);
 
     @Autowired
-    public WeatherDataScheduler(WeatherService weatherService) {
+    public PersistenceScheduler(WeatherService weatherService) {
         this.weatherService = weatherService;
     }
 
