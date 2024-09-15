@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version>
+        <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.weather</groupId>
     <artifactId>WeatherServer</artifactId>
-    <version>77-SNAPSHOT</version>
+    <version>84</version>
     <name>WeatherServer</name>
     <description>WeatherServer</description>
     <properties>
@@ -46,7 +46,7 @@
         <dependency>
             <groupId>com.chrisbarbati</groupId>
             <artifactId>sensehat</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-math3 -->
         <dependency>
