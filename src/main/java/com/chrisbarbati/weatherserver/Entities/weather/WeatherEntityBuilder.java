@@ -1,13 +1,13 @@
-package com.chrisbarbati.weatherserver.Builder;
+package com.chrisbarbati.weatherserver.Entities.weather;
 
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
-import com.chrisbarbati.weatherserver.Models.Weather;
+import com.chrisbarbati.weatherserver.Models.weather.Weather;
 
 /**
  * Abstract Builder class to create a WeatherEntity object.
  */
 
-public interface WeatherEntityBuilderInterface {
+public interface WeatherEntityBuilder {
+
     /**
      * Takes a Weather object and returns a WeatherEntity object
      * @param weather An existing Weather object

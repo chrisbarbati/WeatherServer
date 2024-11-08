@@ -1,4 +1,4 @@
-package com.chrisbarbati.weatherserver.Models;
+package com.chrisbarbati.weatherserver.Models.weatherForecast;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ public class WeatherForecast {
     /**
      * Default constructor simply sets the date.
      *
-     * The slope values are set by the WeatherForecastBuilder class to decouple the classes.
+     * The slope values are set by the DefaultWeatherForecastBuilder class to decouple the classes.
      */
     public WeatherForecast(){
         date = new Date();

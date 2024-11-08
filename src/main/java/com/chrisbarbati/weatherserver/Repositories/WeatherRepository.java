@@ -1,6 +1,6 @@
 package com.chrisbarbati.weatherserver.Repositories;
 
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
+import com.chrisbarbati.weatherserver.Entities.weather.WeatherEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

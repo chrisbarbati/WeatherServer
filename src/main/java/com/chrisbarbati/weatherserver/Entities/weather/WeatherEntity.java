@@ -1,4 +1,4 @@
-package com.chrisbarbati.weatherserver.Entities;
+package com.chrisbarbati.weatherserver.Entities.weather;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

@@ -1,6 +1,6 @@
 package com.chrisbarbati.weatherserver.Utils;
 
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
+import com.chrisbarbati.weatherserver.Entities.weather.WeatherEntity;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

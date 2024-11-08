@@ -1,7 +1,7 @@
 package com.chrisbarbati.weatherserver.Services;
 
-import com.chrisbarbati.weatherserver.Builder.WeatherEntityBuilderInterface;
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
+import com.chrisbarbati.weatherserver.Entities.weather.WeatherEntityBuilder;
+import com.chrisbarbati.weatherserver.Entities.weather.WeatherEntity;
 import com.chrisbarbati.weatherserver.Repositories.WeatherRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,11 +24,11 @@ import java.util.List;
 @Service
 public class WeatherService {
     private final WeatherRepository weatherRepository;
-    private final WeatherEntityBuilderInterface weatherEntityBuilder;
+    private final WeatherEntityBuilder weatherEntityBuilder;
     private static final Logger log = LoggerFactory.getLogger(WeatherService.class);
 
     @Autowired
-    public WeatherService(WeatherRepository weatherRepository, WeatherEntityBuilderInterface weatherEntityBuilder) {
+    public WeatherService(WeatherRepository weatherRepository, WeatherEntityBuilder weatherEntityBuilder) {
         this.weatherRepository = weatherRepository;
         this.weatherEntityBuilder = weatherEntityBuilder;
 

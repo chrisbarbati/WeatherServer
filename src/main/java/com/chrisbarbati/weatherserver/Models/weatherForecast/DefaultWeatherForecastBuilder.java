@@ -1,6 +1,5 @@
-package com.chrisbarbati.weatherserver.Builder;
+package com.chrisbarbati.weatherserver.Models.weatherForecast;
 
-import com.chrisbarbati.weatherserver.Models.WeatherForecast;
 import com.chrisbarbati.weatherserver.Utils.WeatherUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,11 +8,11 @@ import org.springframework.stereotype.Component;
  * Builder class to create a WeatherForecast object.
  */
 @Component
-public class WeatherForecastBuilder implements WeatherForecastBuilderInterface{
+public class DefaultWeatherForecastBuilder implements WeatherForecastBuilder {
     private final WeatherUtils weatherUtils;
 
     @Autowired
-    public WeatherForecastBuilder(WeatherUtils weatherUtils){
+    public DefaultWeatherForecastBuilder(WeatherUtils weatherUtils){
         this.weatherUtils = weatherUtils;
     }
 

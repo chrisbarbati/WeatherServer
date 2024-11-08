@@ -1,4 +1,4 @@
-package com.chrisbarbati.weatherserver.Models;
+package com.chrisbarbati.weatherserver.Models.weather;
 
 import com.chrisbarbati.SenseHAT.Units.PressureUnits;
 import com.chrisbarbati.SenseHAT.Units.TempUnits;
@@ -25,24 +25,6 @@ public class Weather {
     }
 
     /**
-     * Constructor to create a Weather object with temperature, humidity, and pressure.
-     *
-     * Takes no arguments for units, defaults to Celsius and Millibar
-     *
-     * @param temperature Temperature in degrees Celsius
-     * @param humidity % Relative Humidity
-     * @param pressure Pressure in Millibar
-     */
-    public Weather(double temperature, double humidity, double pressure){
-        setTemperature(temperature);
-        setHumidity(humidity);
-        setPressure(pressure);
-        setDstamp(new Date());
-        setTempUnit(TempUnits.CELSIUS);
-        setPressureUnit(PressureUnits.MILLIBAR);
-    }
-
-    /**
      * Fully parameterized constructor
      *
      * @param temperature Temperature in the specified units
@@ -52,12 +34,12 @@ public class Weather {
      * @param pressureUnit Units for pressure
      */
     public Weather(double temperature, double humidity, double pressure, TempUnits tempUnit, PressureUnits pressureUnit){
-        setTemperature(temperature);
-        setHumidity(humidity);
-        setPressure(pressure);
-        setTempUnit(tempUnit);
-        setPressureUnit(pressureUnit);
-        setDstamp(new Date());
+        this.temperature = temperature;
+        this.humidity = humidity;
+        this.pressure = pressure;
+        this.tempUnit = tempUnit;
+        this.pressureUnit = pressureUnit;
+        this.dstamp = new Date();
     }
 
     /**
@@ -102,47 +84,23 @@ public class Weather {
         return temperature;
     }
 
-    public void setTemperature(double temperature) {
-        this.temperature = temperature;
-    }
-
     public Double getHumidity() {
         return humidity;
-    }
-
-    public void setHumidity(double humidity) {
-        this.humidity = humidity;
     }
 
     public Double getPressure() {
         return pressure;
     }
 
-    public void setPressure(double pressure) {
-        this.pressure = pressure;
-    }
-
     public TempUnits getTempUnit() {
         return tempUnit;
-    }
-
-    public void setTempUnit(TempUnits tempUnit) {
-        this.tempUnit = tempUnit;
     }
 
     public PressureUnits getPressureUnit() {
         return pressureUnit;
     }
 
-    public void setPressureUnit(PressureUnits pressureUnit) {
-        this.pressureUnit = pressureUnit;
-    }
-
     public Date getDstamp() {
         return dstamp;
-    }
-
-    public void setDstamp(Date dstamp) {
-        this.dstamp = dstamp;
     }
 }

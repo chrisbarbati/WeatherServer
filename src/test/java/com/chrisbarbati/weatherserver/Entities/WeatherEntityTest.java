@@ -1,5 +1,6 @@
 package com.chrisbarbati.weatherserver.Entities;
 
+import com.chrisbarbati.weatherserver.Entities.weather.WeatherEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

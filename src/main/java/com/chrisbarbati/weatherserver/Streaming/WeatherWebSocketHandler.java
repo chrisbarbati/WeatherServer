@@ -1,6 +1,6 @@
 package com.chrisbarbati.weatherserver.Streaming;
 
-import com.chrisbarbati.weatherserver.Models.Weather;
+import com.chrisbarbati.weatherserver.Models.weather.Weather;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;

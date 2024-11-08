@@ -1,7 +1,10 @@
-package com.chrisbarbati.weatherserver.Builder;
+package com.chrisbarbati.weatherserver.Entities.weather;
 
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
-import com.chrisbarbati.weatherserver.Models.Weather;
+import com.chrisbarbati.SenseHAT.Units.PressureUnits;
+import com.chrisbarbati.SenseHAT.Units.TempUnits;
+import com.chrisbarbati.weatherserver.Models.weather.DefaultWeatherBuilder;
+import com.chrisbarbati.weatherserver.Models.weather.Weather;
+import com.chrisbarbati.weatherserver.Models.weather.WeatherBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,7 +16,24 @@ import java.util.Date;
  */
 
 @Component
-public class WeatherEntityBuilder implements WeatherEntityBuilderInterface{
+public class DefaultWeatherEntityBuilder implements WeatherEntityBuilder {
+
+    private Double temperature;
+    private Double humidity;
+    private Double pressure;
+    private Date dstamp;
+
+    private TempUnits tempUnit;
+    private PressureUnits pressureUnit;
+
+    /**
+     * Default constructor
+     */
+    public DefaultWeatherEntityBuilder() {
+    }
+
+
+
 
     /**
      * Takes a Weather object and returns a WeatherEntity object.
@@ -41,15 +61,15 @@ public class WeatherEntityBuilder implements WeatherEntityBuilderInterface{
      *
      * Instantiates a new Weather object and calls the other getWeatherEntity method.
      *
-     * Uses WeatherBuilder to uncouple this class from the Weather class.
+     * Uses DefaultWeatherBuilder to uncouple this class from the Weather class.
      *
      * @return A new WeatherEntity object
      */
     @Override
     public WeatherEntity getWeatherEntity() {
-        WeatherBuilder wb = new WeatherBuilder();
+        WeatherBuilder wb = new DefaultWeatherBuilder();
 
-        Weather weather = wb.getWeather();
+        Weather weather = wb.build();
 
         return getWeatherEntity(weather);
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration status="INFO">
     <Appenders>
         <!-- Console Appender -->
         <Console name="Console" target="SYSTEM_OUT">
@@ -10,6 +10,11 @@
         <File name="File" fileName="logs/app.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
         </File>
+
+        <!-- Custom SMTP Appender -->
+        <Appender name="CustomSMTP" class="com.chrisbarbati.weatherserver.logging.SmtpAppender">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"/>
+        </Appender>
     </Appenders>
 
     <Loggers>

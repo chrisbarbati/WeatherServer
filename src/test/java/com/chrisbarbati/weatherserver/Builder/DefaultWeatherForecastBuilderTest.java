@@ -1,6 +1,7 @@
 package com.chrisbarbati.weatherserver.Builder;
 
-import com.chrisbarbati.weatherserver.Models.WeatherForecast;
+import com.chrisbarbati.weatherserver.Models.weatherForecast.DefaultWeatherForecastBuilder;
+import com.chrisbarbati.weatherserver.Models.weatherForecast.WeatherForecast;
 import com.chrisbarbati.weatherserver.Utils.WeatherUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,10 +13,10 @@ import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class WeatherForecastBuilderTest {
+public class DefaultWeatherForecastBuilderTest {
 
     @InjectMocks
-    private WeatherForecastBuilder weatherForecastBuilder;
+    private DefaultWeatherForecastBuilder weatherForecastBuilder;
 
     @Mock
     private WeatherUtils weatherUtils;

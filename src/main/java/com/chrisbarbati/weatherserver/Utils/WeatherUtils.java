@@ -1,6 +1,6 @@
 package com.chrisbarbati.weatherserver.Utils;
 
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
+import com.chrisbarbati.weatherserver.Entities.weather.WeatherEntity;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
 import org.apache.commons.math3.fitting.WeightedObservedPoints;

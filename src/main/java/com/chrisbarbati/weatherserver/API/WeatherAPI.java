@@ -1,10 +1,10 @@
 package com.chrisbarbati.weatherserver.API;
 
-import com.chrisbarbati.weatherserver.Builder.WeatherBuilderInterface;
-import com.chrisbarbati.weatherserver.Builder.WeatherForecastBuilderInterface;
-import com.chrisbarbati.weatherserver.Entities.WeatherEntity;
-import com.chrisbarbati.weatherserver.Models.Weather;
-import com.chrisbarbati.weatherserver.Models.WeatherForecast;
+import com.chrisbarbati.weatherserver.Models.weather.WeatherBuilder;
+import com.chrisbarbati.weatherserver.Models.weatherForecast.WeatherForecastBuilder;
+import com.chrisbarbati.weatherserver.Entities.weather.WeatherEntity;
+import com.chrisbarbati.weatherserver.Models.weather.Weather;
+import com.chrisbarbati.weatherserver.Models.weatherForecast.WeatherForecast;
 import com.chrisbarbati.weatherserver.Services.WeatherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +23,13 @@ import java.util.List;
 public class WeatherAPI {
 
     private WeatherService weatherService;
-    private WeatherBuilderInterface weatherBuilder;
-    private WeatherForecastBuilderInterface weatherForecastBuilder;
+    private WeatherBuilder weatherBuilder;
+    private WeatherForecastBuilder weatherForecastBuilder;
 
     private static Logger log = LoggerFactory.getLogger(WeatherAPI.class);
 
     @Autowired
-    public WeatherAPI(WeatherService weatherService, WeatherBuilderInterface weatherBuilder, WeatherForecastBuilderInterface weatherForecastBuilder){
+    public WeatherAPI(WeatherService weatherService, WeatherBuilder weatherBuilder, WeatherForecastBuilder weatherForecastBuilder){
         this.weatherService = weatherService;
         this.weatherBuilder = weatherBuilder;
         this.weatherForecastBuilder = weatherForecastBuilder;
@@ -45,7 +45,17 @@ public class WeatherAPI {
      */
     @GetMapping("/weather")
     public Weather getWeather(@RequestParam(value = "temp-unit", required = false) String tempUnit, @RequestParam(value = "pressure-unit", required = false) String pressureUnit){
-        Weather weather = weatherBuilder.getWeather(tempUnit, pressureUnit);
+
+        if(tempUnit != null){
+            weatherBuilder.tempUnit(tempUnit);
+        }
+
+        if(pressureUnit != null){
+            weatherBuilder.pressureUnit(pressureUnit);
+        }
+
+        Weather weather = weatherBuilder.build();
+
         log.info("Weather data retrieved: " + weather.toString());
         return weather;
     }
