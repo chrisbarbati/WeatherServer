@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "com.chrisbarbati.weatherserver.Repositories")
+@EnableJpaRepositories(basePackages = "com.chrisbarbati.weatherserver.weather.repository")
 @EnableScheduling
 @EnableCaching
 public class WeatherServerApplication {

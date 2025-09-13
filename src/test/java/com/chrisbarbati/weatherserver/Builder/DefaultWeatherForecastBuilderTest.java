@@ -1,8 +1,8 @@
 package com.chrisbarbati.weatherserver.Builder;
 
-import com.chrisbarbati.weatherserver.Models.weatherForecast.DefaultWeatherForecastBuilder;
-import com.chrisbarbati.weatherserver.Models.weatherForecast.WeatherForecast;
-import com.chrisbarbati.weatherserver.Utils.WeatherUtils;
+import com.chrisbarbati.weatherserver.weatherforecast.DefaultWeatherForecastBuilder;
+import com.chrisbarbati.weatherserver.weatherforecast.WeatherForecast;
+import com.chrisbarbati.weatherserver.weather.utils.WeatherUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

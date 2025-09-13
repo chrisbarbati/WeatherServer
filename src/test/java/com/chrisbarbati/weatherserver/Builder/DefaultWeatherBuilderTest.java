@@ -1,10 +1,8 @@
 package com.chrisbarbati.weatherserver.Builder;
 
 import com.chrisbarbati.SenseHAT.SenseHAT;
-import com.chrisbarbati.weatherserver.Models.weather.DefaultWeatherBuilder;
+import com.chrisbarbati.weatherserver.weather.model.DefaultWeatherBuilder;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
