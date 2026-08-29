@@ -6,6 +6,7 @@ import com.chrisbarbati.weatherserver.weather.repository.WeatherRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.chrisbarbati.weatherserver.weather.utils.WeatherSampler;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -101,6 +102,31 @@ public class DefaultWeatherService implements WeatherService {
         LOGGER.info("Weather data from the last hour retrieved: " + weatherData.size() + " records");
 
         return weatherData;
+    }
+
+    /**
+     * Past weather, reduced to one sample per {@code bucketHours} window.
+     * <p>
+     * Reuses the cached full-history query, then downsamples in memory so a
+     * Raspberry Pi does not have to serialize hundreds of thousands of JSON rows
+     * on every request. Pass {@code bucketHours <= 0} for the raw dump.
+     * </p>
+     *
+     * @param bucketHours bucket width in hours
+     * @return newest-first sampled (or raw) history
+     * @since 1.0.0
+     * @author Christian Barbati
+     */
+    @Override
+    public List<WeatherEntity> getWeatherDataSampled(int bucketHours) {
+        List<WeatherEntity> weatherData = getWeatherDataByDateDescending();
+        if (bucketHours <= 0) {
+            return weatherData;
+        }
+        List<WeatherEntity> sampled = WeatherSampler.downsample(weatherData, bucketHours * 3_600_000L);
+        LOGGER.info("Weather data sampled to " + sampled.size() + " of " + weatherData.size()
+                + " records (bucket-hours=" + bucketHours + ")");
+        return sampled;
     }
 }
 

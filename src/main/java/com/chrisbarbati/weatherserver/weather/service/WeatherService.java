@@ -38,4 +38,14 @@ public interface WeatherService {
      */
     List<WeatherEntity> getWeatherDataLastHour();
 
+    /**
+     * Get past weather data, optionally reduced to one sample per time bucket.
+     *
+     * @param bucketHours width of each bucket in hours. {@code 0} or less returns every stored row.
+     * @return A {@link List} of {@link WeatherEntity} objects, newest first.
+     * @since 1.0.0
+     * @author Christian Barbati
+     */
+    List<WeatherEntity> getWeatherDataSampled(int bucketHours);
+
 }

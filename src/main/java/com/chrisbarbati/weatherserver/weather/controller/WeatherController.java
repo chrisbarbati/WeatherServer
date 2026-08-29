@@ -78,18 +78,23 @@ public class WeatherController {
     }
 
     /**
-     * Gets all of the past weather records
+     * Gets past weather records.
+     * <p>
+     *     Defaults to one sample every three hours so the Pi is not forced to
+     *     serialize the entire MariaDB table. Pass {@code bucket-hours=0} for
+     *     the raw dump.
+     * </p>
      *
-     * TODO: Add parameters to filter the data
-     *
-     * @return All of the past weather data
+     * @param bucketHours sampling window in hours. Default 3. {@code 0} returns every row.
+     * @return Past weather data, newest first
      * @since 1.0.0
      * @author Christian Barbati
      */
     @GetMapping("/weather/past")
-    public List<WeatherEntity> getWeatherData(){
-        List<WeatherEntity> weatherData = weatherService.getWeatherDataByDateDescending();
-        LOGGER.info("Weather data retrieved: " + weatherData.toString());
+    public List<WeatherEntity> getWeatherData(
+            @RequestParam(value = "bucket-hours", required = false, defaultValue = "3") int bucketHours){
+        List<WeatherEntity> weatherData = weatherService.getWeatherDataSampled(bucketHours);
+        LOGGER.info("Weather data retrieved: " + weatherData.size() + " records");
         return weatherData;
     }
 
@@ -103,7 +108,7 @@ public class WeatherController {
     @GetMapping("/weather/pasthour")
     public List<WeatherEntity> getWeatherDataPastHour(){
         List<WeatherEntity> weatherData = weatherService.getWeatherDataLastHour();
-        LOGGER.info("Weather data retrieved: " + weatherData.toString());
+        LOGGER.info("Weather data retrieved: " + weatherData.size() + " records");
         return weatherData;
     }
 

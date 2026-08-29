@@ -70,4 +70,37 @@ public class WeatherServiceTest {
         assertEquals(weatherEntities, result);
         verify(weatherRepository, times(1)).findByDstampBetweenOrderByDstampDesc(any(Date.class), any(Date.class));
     }
+
+    @Test
+    public void testGetWeatherDataSampledKeepsOneRowPerBucket() {
+        Date now = new Date();
+        WeatherEntity newest = new WeatherEntity();
+        newest.setDstamp(now);
+        newest.setTemperature(21.0);
+        WeatherEntity sameBucket = new WeatherEntity();
+        sameBucket.setDstamp(new Date(now.getTime() - 30 * 60 * 1000L));
+        sameBucket.setTemperature(20.5);
+        WeatherEntity olderBucket = new WeatherEntity();
+        olderBucket.setDstamp(new Date(now.getTime() - 4 * 60 * 60 * 1000L));
+        olderBucket.setTemperature(19.0);
+        List<WeatherEntity> weatherEntities = Arrays.asList(newest, sameBucket, olderBucket);
+
+        when(weatherRepository.findAllByOrderByDstampDesc()).thenReturn(weatherEntities);
+
+        List<WeatherEntity> result = weatherService.getWeatherDataSampled(3);
+
+        assertEquals(2, result.size());
+        assertEquals(newest, result.get(0));
+        assertEquals(olderBucket, result.get(1));
+    }
+
+    @Test
+    public void testGetWeatherDataSampledRawDump() {
+        WeatherEntity weatherEntity1 = new WeatherEntity();
+        weatherEntity1.setDstamp(new Date());
+        List<WeatherEntity> weatherEntities = Arrays.asList(weatherEntity1);
+        when(weatherRepository.findAllByOrderByDstampDesc()).thenReturn(weatherEntities);
+
+        assertEquals(weatherEntities, weatherService.getWeatherDataSampled(0));
+    }
 }

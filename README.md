@@ -50,9 +50,11 @@ To get past data, there is an additional endpoint:
 
 ```
 GET /API/weather/past
+GET /API/weather/past?bucket-hours=3
+GET /API/weather/past?bucket-hours=0
 ```
 
-This endpoint returns a JSON object representing all past historical data, stored in ten minute intervals. This feature is currently in development and there may be changes in the near future.
+By default this returns one sample every three hours so the response stays small. Pass `bucket-hours=0` to get every stored row. Samples are persisted about once a minute.
 
 ## **Experimental - Weather Forecast **
 
