@@ -14,8 +14,8 @@ import java.util.Map;
  * the first row seen for a bucket is the latest sample in that window.
  * </p>
  *
- * @since 1.0.0
- * @author Christian Barbati
+ * @since 1.1.0
+ * @author Daniel Yevtushenko
  */
 public final class WeatherSampler {
 

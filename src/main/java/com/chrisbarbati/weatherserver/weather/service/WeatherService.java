@@ -47,8 +47,8 @@ public interface WeatherService {
      * @param from inclusive start, or {@code null} for unbounded
      * @param to inclusive end, or {@code null} for now
      * @return A {@link List} of {@link WeatherEntity} objects, newest first.
-     * @since 1.0.0
-     * @author Christian Barbati
+     * @since 1.1.0
+     * @author Daniel Yevtushenko
      */
     List<WeatherEntity> getWeatherDataSampled(int bucketHours, Date from, Date to);
 
@@ -57,8 +57,8 @@ public interface WeatherService {
      *
      * @param bucketHours width of each bucket in hours. {@code 0} or less returns every stored row.
      * @return A {@link List} of {@link WeatherEntity} objects, newest first.
-     * @since 1.0.0
-     * @author Christian Barbati
+     * @since 1.1.0
+     * @author Daniel Yevtushenko
      */
     default List<WeatherEntity> getWeatherDataSampled(int bucketHours) {
         return getWeatherDataSampled(bucketHours, null, null);

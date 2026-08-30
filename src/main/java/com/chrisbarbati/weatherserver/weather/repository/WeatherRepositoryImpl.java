@@ -11,8 +11,8 @@ import java.util.List;
  * MariaDB uses {@code UNIX_TIMESTAMP}; H2 uses {@code DATEDIFF} so the same
  * grouping can be tested off the Pi.
  *
- * @since 1.0.0
- * @author Christian Barbati
+ * @since 1.1.0
+ * @author Daniel Yevtushenko
  */
 public class WeatherRepositoryImpl implements WeatherRepositoryCustom {
 

@@ -9,8 +9,8 @@ import java.util.List;
  * Native sampling queries so {@code /API/weather/past} does not have to load
  * the entire {@code weather} table into memory.
  *
- * @since 1.0.0
- * @author Christian Barbati
+ * @since 1.1.0
+ * @author Daniel Yevtushenko
  */
 public interface WeatherRepositoryCustom {
 

@@ -11,8 +11,8 @@ import java.util.Date;
  *     full timestamps.
  * </p>
  *
- * @since 1.0.0
- * @author Christian Barbati
+ * @since 1.1.0
+ * @author Daniel Yevtushenko
  */
 public final class PastQueryBounds {
 

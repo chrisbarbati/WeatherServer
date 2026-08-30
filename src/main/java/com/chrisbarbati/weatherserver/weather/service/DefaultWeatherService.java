@@ -115,8 +115,8 @@ public class DefaultWeatherService implements WeatherService {
      * @param from inclusive start, or {@code null} for the oldest row
      * @param to inclusive end, or {@code null} for now
      * @return newest-first sampled (or raw) history
-     * @since 1.0.0
-     * @author Christian Barbati
+     * @since 1.1.0
+     * @author Daniel Yevtushenko
      */
     @Override
     @Cacheable(value = "weatherDataSampled", key = "#bucketHours + '-' + #from + '-' + #to")
