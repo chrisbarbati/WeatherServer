@@ -74,9 +74,12 @@ This repository serves as a demonstration of implementing a basic RESTful API us
 
 Unit tests are included wherever possible. The only methods not tested are those that would fail due to my compiling on Windows hardware (IntelliJ remote development does not work on my Raspberry Pi for some reason, so I develop locally). For example, methods that cause an I2C read to occur will always fail as my Thinkpad does not have an I2C bus.
 
+## Changelog
+v1.0.87, 13 September 2025 - Perform wide-scale cleanup, upgrade project to JDK21, improve documentation throughout application. Convert versioning system to the standard semantic version (Major.Minor.Patch) rather than the simple incrementing number I used when I started developing this application two years ago.
+
 ## Acknowledgment
 
-This project utilizes the [SenseHATI2C](https://github.com/chrisbarbati/SenseHatI2C/tree/main) library, authored by myself, to interface with SenseHAT sensors.
+This project utilizes the [SenseHAT](https://github.com/chrisbarbati/SenseHat/tree/main) library, authored by myself, to interface with SenseHAT sensors.
 
 ---
 For any questions or feedback, please contact [Christian Barbati](mailto:chris.barbati@gmail.com)
