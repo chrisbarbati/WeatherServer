@@ -5,13 +5,12 @@ import com.chrisbarbati.weatherserver.weather.entity.WeatherEntity;
 import com.chrisbarbati.weatherserver.weather.repository.WeatherRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.chrisbarbati.weatherserver.weather.utils.WeatherSampler;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +53,7 @@ public class DefaultWeatherService implements WeatherService {
      * @author Christian Barbati
      */
     @Transactional
-    @CacheEvict(value = {"weatherDataByDateDescending", "weatherDataLastHour"}, allEntries = true)
+    @CacheEvict(value = {"weatherDataByDateDescending", "weatherDataLastHour", "weatherDataSampled"}, allEntries = true)
     public void saveWeatherData() {
         WeatherEntity weatherEntity = weatherEntityBuilder.getWeatherEntity();
 
@@ -107,24 +106,38 @@ public class DefaultWeatherService implements WeatherService {
     /**
      * Past weather, reduced to one sample per {@code bucketHours} window.
      * <p>
-     * Reuses the cached full-history query, then downsamples in memory so a
-     * Raspberry Pi does not have to serialize hundreds of thousands of JSON rows
-     * on every request. Pass {@code bucketHours <= 0} for the raw dump.
+     *     Sampling happens in SQL so the Pi does not load the entire table into
+     *     memory. Optional {@code from}/{@code to} bounds use the same query.
+     *     Pass {@code bucketHours <= 0} for every stored row in that range.
      * </p>
      *
      * @param bucketHours bucket width in hours
+     * @param from inclusive start, or {@code null} for the oldest row
+     * @param to inclusive end, or {@code null} for now
      * @return newest-first sampled (or raw) history
      * @since 1.0.0
      * @author Christian Barbati
      */
     @Override
-    public List<WeatherEntity> getWeatherDataSampled(int bucketHours) {
-        List<WeatherEntity> weatherData = getWeatherDataByDateDescending();
-        if (bucketHours <= 0) {
-            return weatherData;
+    @Cacheable(value = "weatherDataSampled", key = "#bucketHours + '-' + #from + '-' + #to")
+    public List<WeatherEntity> getWeatherDataSampled(int bucketHours, Date from, Date to) {
+        Date start = from != null ? from : new Date(0L);
+        Date end = to != null ? to : new Date();
+        if (start.after(end)) {
+            return Collections.emptyList();
         }
-        List<WeatherEntity> sampled = WeatherSampler.downsample(weatherData, bucketHours * 3_600_000L);
-        LOGGER.info("Weather data sampled to " + sampled.size() + " of " + weatherData.size()
+
+        if (bucketHours <= 0) {
+            if (from == null && to == null) {
+                return getWeatherDataByDateDescending();
+            }
+            List<WeatherEntity> range = weatherRepository.findByDstampBetweenOrderByDstampDesc(start, end);
+            LOGGER.info("Weather data retrieved: " + range.size() + " records (raw range)");
+            return range;
+        }
+
+        List<WeatherEntity> sampled = weatherRepository.findSampled(start, end, bucketHours * 3600L);
+        LOGGER.info("Weather data sampled to " + sampled.size()
                 + " records (bucket-hours=" + bucketHours + ")");
         return sampled;
     }

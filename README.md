@@ -19,7 +19,7 @@ I have recently added some additional functionality:
 
 ## Planned Features
 
-Additional work to be done includes making the code more efficient and adding more API endpoint functionality (accepting a date range, or time interval) and possibly adding more endpoints
+Possible later work: more endpoints. Date range (`from`/`to`) and time-interval sampling on `/API/weather/past` are implemented.
 
 
 ## Making API Requests
@@ -50,11 +50,12 @@ To get past data, there is an additional endpoint:
 
 ```
 GET /API/weather/past
-GET /API/weather/past?bucket-hours=3
-GET /API/weather/past?bucket-hours=0
+GET /API/weather/past?days=90
+GET /API/weather/past?from=2024-01-01&to=2024-06-01
+GET /API/weather/past?bucket-hours=0&days=7
 ```
 
-By default this returns one sample every three hours so the response stays small. Pass `bucket-hours=0` to get every stored row. Samples are persisted about once a minute.
+By default this returns one sample every three hours, chosen in SQL so the Pi does not load the entire table into memory. Pass `bucket-hours=0` to get every stored row. Optional `days=90` means the last 90 days. Or pass calendar dates as `from` and `to` (`yyyy-MM-dd`). Samples are persisted about once a minute.
 
 ## **Experimental - Weather Forecast **
 

@@ -65,12 +65,12 @@ public class WeatherControllerTest {
         WeatherEntity weatherEntity2 = new WeatherEntity();
         List<WeatherEntity> weatherEntities = Arrays.asList(weatherEntity1, weatherEntity2);
 
-        when(weatherService.getWeatherDataSampled(3)).thenReturn(weatherEntities);
+        when(weatherService.getWeatherDataSampled(3, null, null)).thenReturn(weatherEntities);
 
-        List<WeatherEntity> result = weatherController.getWeatherData(3);
+        List<WeatherEntity> result = weatherController.getWeatherData(3, null, null, null);
 
         assertEquals(weatherEntities, result);
-        verify(weatherService, times(1)).getWeatherDataSampled(3);
+        verify(weatherService, times(1)).getWeatherDataSampled(3, null, null);
     }
 
     /**

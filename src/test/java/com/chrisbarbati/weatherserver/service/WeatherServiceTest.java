@@ -85,13 +85,16 @@ public class WeatherServiceTest {
         olderBucket.setTemperature(19.0);
         List<WeatherEntity> weatherEntities = Arrays.asList(newest, sameBucket, olderBucket);
 
-        when(weatherRepository.findAllByOrderByDstampDesc()).thenReturn(weatherEntities);
+        when(weatherRepository.findSampled(any(Date.class), any(Date.class), eq(3 * 3600L))).thenReturn(
+                Arrays.asList(newest, olderBucket));
 
-        List<WeatherEntity> result = weatherService.getWeatherDataSampled(3);
+        List<WeatherEntity> result = weatherService.getWeatherDataSampled(3, null, null);
 
         assertEquals(2, result.size());
         assertEquals(newest, result.get(0));
         assertEquals(olderBucket, result.get(1));
+        verify(weatherRepository, times(1)).findSampled(any(Date.class), any(Date.class), eq(3 * 3600L));
+        verify(weatherRepository, never()).findAllByOrderByDstampDesc();
     }
 
     @Test
@@ -101,6 +104,21 @@ public class WeatherServiceTest {
         List<WeatherEntity> weatherEntities = Arrays.asList(weatherEntity1);
         when(weatherRepository.findAllByOrderByDstampDesc()).thenReturn(weatherEntities);
 
-        assertEquals(weatherEntities, weatherService.getWeatherDataSampled(0));
+        assertEquals(weatherEntities, weatherService.getWeatherDataSampled(0, null, null));
+        verify(weatherRepository, times(1)).findAllByOrderByDstampDesc();
+    }
+
+    @Test
+    public void testGetWeatherDataSampledRawRangeDoesNotLoadFullTable() {
+        WeatherEntity weatherEntity1 = new WeatherEntity();
+        weatherEntity1.setDstamp(new Date());
+        List<WeatherEntity> weatherEntities = Arrays.asList(weatherEntity1);
+        Date from = new Date(1_700_000_000_000L);
+        Date to = new Date(1_700_003_600_000L);
+        when(weatherRepository.findByDstampBetweenOrderByDstampDesc(from, to)).thenReturn(weatherEntities);
+
+        assertEquals(weatherEntities, weatherService.getWeatherDataSampled(0, from, to));
+        verify(weatherRepository, times(1)).findByDstampBetweenOrderByDstampDesc(from, to);
+        verify(weatherRepository, never()).findAllByOrderByDstampDesc();
     }
 }

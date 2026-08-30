@@ -17,7 +17,7 @@ import java.util.List;
  * @author Christian Barbati
  */
 @Repository
-public interface WeatherRepository extends JpaRepository<WeatherEntity, Integer> {
+public interface WeatherRepository extends JpaRepository<WeatherEntity, Integer>, WeatherRepositoryCustom {
 
     /**
      * Hibernate ORM will handle the sorting of the data based on the naming convention.
