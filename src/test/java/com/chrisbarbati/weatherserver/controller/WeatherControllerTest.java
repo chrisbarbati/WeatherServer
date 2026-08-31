@@ -5,7 +5,7 @@ import com.chrisbarbati.weatherserver.weather.model.WeatherBuilder;
 import com.chrisbarbati.weatherserver.weatherforecast.WeatherForecastBuilder;
 import com.chrisbarbati.weatherserver.weather.entity.WeatherEntity;
 import com.chrisbarbati.weatherserver.weatherforecast.WeatherForecast;
-import com.chrisbarbati.weatherserver.weather.service.DefaultWeatherService;
+import com.chrisbarbati.weatherserver.weather.service.WeatherService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class WeatherControllerTest {
     private WeatherController weatherController;
 
     @Mock
-    private DefaultWeatherService weatherService;
+    private WeatherService weatherService;
 
     @Mock
     private WeatherBuilder weatherBuilder;
@@ -65,12 +65,12 @@ public class WeatherControllerTest {
         WeatherEntity weatherEntity2 = new WeatherEntity();
         List<WeatherEntity> weatherEntities = Arrays.asList(weatherEntity1, weatherEntity2);
 
-        when(weatherService.getWeatherDataByDateDescending()).thenReturn(weatherEntities);
+        when(weatherService.getWeatherDataSampled(3, null, null)).thenReturn(weatherEntities);
 
-        List<WeatherEntity> result = weatherController.getWeatherData();
+        List<WeatherEntity> result = weatherController.getWeatherData(3, null, null, null);
 
         assertEquals(weatherEntities, result);
-        verify(weatherService, times(1)).getWeatherDataByDateDescending();
+        verify(weatherService, times(1)).getWeatherDataSampled(3, null, null);
     }
 
     /**
