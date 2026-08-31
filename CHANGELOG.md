@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.0] - 2026-08-30
 
+### Changed
+- Change /API/weather/past to return 3 hour intervals rather than the entire table, with optional parameters to alter range
+
 ## [1.0.87] - 2025-09-13
 
 ### Added
